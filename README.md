@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎓 MentorLink — Connect. Learn. Grow.
 
-## Getting Started
+MentorLink is a fullstack mentorship platform where learners can connect with experienced mentors for personalized guidance through **1:1 or group video sessions**. Designed for scale, speed, and reliability, MentorLink combines modern technologies like **Next.js**, **Node.js**, **Kafka**, and **AWS** to deliver a seamless experience for both mentors and mentees.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 👥 Core Functionality
+- 🔎 **Search & Discover** mentors by skill, experience, and availability
+- 🗓️ **Book Sessions** with real-time slot availability
+- 📹 **1:1 and 1:Many Video Calls** (WebRTC)
+- 📝 **Pre-Session Forms** to define agendas
+- 🧾 **Post-Session Feedback** and reviews
+- 💳 **Payments & Credits** (Stripe/UPI support)
+- 🔒 **Role-Based Access Control** (Admin, Mentor, Mentee)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🧠 Advanced Features
+- 🎥 **Video Recording + Transcoding** (FFmpeg)
+- ⏺️ **Auto-recorded Sessions** (like Riverside.fm)
+- 📨 **In-App Notifications** + Emails via Kafka
+- 🧾 **Audit Logs** for critical system actions
+- 🔁 **Refresh Token Rotation** + Secure Cookie Auth
+- 🧠 **Rate Limiting** for security-sensitive routes (login, booking)
+- 🔍 **Smart Filtering** of mentors by rating, tags, topics
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🏗️ Tech Stack & System Design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🖼️ Frontend
+- **Next.js 14** with App Router & SSR
+- **TailwindCSS** for responsive UI
+- **Zustand/Redux** for global state management
+- **WebRTC + Socket.io** for video + real-time messaging
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🧩 Backend
+- **Node.js + Express** API
+- **Prisma ORM** with **PostgreSQL**
+- **Kafka** for async communication (session events, notifications)
+- **Redis** for rate limiting, token session cache
+- **FFmpeg** for on-the-fly video encoding
+- **JWT + Cookies** for Auth & Session management
 
-## Deploy on Vercel
+### ☁️ AWS Infrastructure
+| Service         | Purpose                          |
+|----------------|----------------------------------|
+| EC2             | Hosts Node backend               |
+| S3              | Stores recorded session videos   |
+| Lambda          | Handles background jobs (e.g., FFmpeg processing, emails)
+| RDS (PostgreSQL)| Scalable managed database        |
+| CloudWatch      | Logs and monitoring              |
+| ElastiCache     | Redis instance for caching       |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
