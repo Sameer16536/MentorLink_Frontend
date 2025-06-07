@@ -6,7 +6,7 @@ const AnimatedText = () => {
   const texts = [
     { text: "FAANG Interview", color: "from-blue-400 to-cyan-400" },
     { text: "Career Switch", color: "from-green-400 to-emerald-400" },
-    { text: "10LPA+ Job", color: "from-yellow-400 to-orange-400" },
+    { text: "10+ LPA Job", color: "from-yellow-400 to-orange-400" },
     { text: "Remote Work", color: "from-purple-400 to-pink-400" },
     { text: "Startup Journey", color: "from-red-400 to-rose-400" },
   ];
