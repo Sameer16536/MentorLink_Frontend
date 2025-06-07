@@ -26,7 +26,7 @@ const LoginPage = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    role: "seeker", // 'seeker' or 'expert'
+    role: "mentee", // 'mentee' or 'mentor'
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,11 +48,11 @@ const LoginPage = () => {
     <div className="grid grid-cols-2 gap-4">
       {[
         {
-          key: "seeker",
+          key: "mentee",
           label: "I'm seeking guidance",
           desc: "Looking for mentorship",
         },
-        { key: "expert", label: "I'm an expert", desc: "Ready to help others" },
+        { key: "mentor", label: "I'm an expert", desc: "Ready to help others" },
       ].map((role) => (
         <button
           key={role.key}
