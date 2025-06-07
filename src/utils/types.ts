@@ -9,3 +9,8 @@ export type InputFieldProps = {
   onToggle?: () => void;
   showPassword?: boolean;
 };
+export type SocialButtonProps = {
+  icon: React.ElementType;
+  provider: string;
+  className?: string;
+};

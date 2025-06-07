@@ -9,6 +9,7 @@ import {
   Chrome,
 } from "lucide-react";
 import InputField from "@/components/InputField";
+import SocialButton from "@/components/SocialButton";
 
 
 
@@ -40,23 +41,8 @@ const LoginPage = () => {
     console.log("Form submitted:", formData);
   };
 
-  type SocialButtonProps = {
-    icon: React.ElementType;
-    provider: string;
-    className?: string;
-  };
-  const SocialButton = ({
-    icon: Icon,
-    provider,
-    className,
-  }: SocialButtonProps) => (
-    <button
-      className={`flex items-center justify-center space-x-3 w-full py-3 px-4 rounded-xl border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 group ${className}`}
-    >
-      <Icon className="h-5 w-5" />
-      <span className="font-medium">Continue with {provider}</span>
-    </button>
-  );
+
+
 
   const RoleSelector = () => (
     <div className="grid grid-cols-2 gap-4">
