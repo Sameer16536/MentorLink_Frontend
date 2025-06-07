@@ -108,13 +108,13 @@ const Navbar = ({
                     </p>
                   </div>
                   <a
-                    href="/login"
+                    href="/login?role=MENTEE"
                     className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
                   >
                     Login
                   </a>
                   <a
-                    href="/signup"
+                    href="/signup?role=MENTEE"
                     className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
                   >
                     Sign up
@@ -207,13 +207,13 @@ const Navbar = ({
                 Account
               </p>
               <a
-                href="/login"
+                href="/login?role=MENTOR"
                 className="text-gray-300 hover:text-white block px-4 py-2 rounded-lg text-sm hover:bg-white/10 transition-all duration-300"
               >
                 Login
               </a>
               <a
-                href="/signup"
+                href="/signup?role=MENTOR"
                 className="text-gray-300 hover:text-white block px-4 py-2 rounded-lg text-sm hover:bg-white/10 transition-all duration-300"
               >
                 Sign up

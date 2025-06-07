@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import InputField from "@/components/InputField";
 import SocialButton from "@/components/SocialButton";
+import { useSearchParams } from "next/navigation";
 
 
 
@@ -21,12 +22,14 @@ const LoginPage = () => {
   const [currentPage, setCurrentPage] = useState("login");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const searchParams = useSearchParams()
+  const role = searchParams.get("role")
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-    role: "mentee", // 'mentee' or 'mentor'
+    role: role || "MENTEE", // 'mentee' or 'mentor'
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,9 +109,7 @@ const LoginPage = () => {
             {/* Role Selection (Signup only) */}
             {currentPage === "signup" && (
               <div className="space-y-3">
-                <label className="text-sm font-medium text-gray-300">
-                  I am...
-                </label>
+               
                 <RoleSelector />
               </div>
             )}
