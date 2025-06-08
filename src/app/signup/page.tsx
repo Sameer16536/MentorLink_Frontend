@@ -218,7 +218,7 @@ const SignupPage = () => {
           <p className="text-gray-400">
             Already have an account?{" "}
             <button
-              onClick={() => router.push("/login")}
+              onClick={() => router.push(`/login?role=${formData.role}`)}
               className="text-red-400 hover:text-red-300 font-medium transition-colors duration-300"
             >
               Sign in
