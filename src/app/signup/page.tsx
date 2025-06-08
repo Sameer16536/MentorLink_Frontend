@@ -89,7 +89,7 @@ const SignupPage = () => {
         {/* Logo Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center space-x-3 mb-4">
-            <div className="w-10 h-10 bg-gradient-to-br from-red-500 via-red-600 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+            <div className="w-10 h-10 bg-gradient-to-br from-red-500 via-red-600 to-orange-500 rounded-full flex items-center justify-center shadow-lg" onClick={() => router.push("/")}>
               <span className="text-white font-bold">M</span>
             </div>
             <span className="text-white font-semibold text-2xl tracking-tight">
