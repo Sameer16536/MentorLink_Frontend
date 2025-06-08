@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import { Mail, Lock, ArrowRight, Github, Chrome } from "lucide-react";
 import InputField from "@/components/InputField";
 import SocialButton from "@/components/SocialButton";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { apiUtility } from "@/utils/Api";
 
 const LoginPage = () => {
-  const [currentPage, setCurrentPage] = useState("login");
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const searchParams = useSearchParams();
   const role = searchParams.get("role");
@@ -59,12 +59,10 @@ const LoginPage = () => {
             </span>
           </div>
           <h1 className="text-2xl font-bold text-white mb-2">
-            {currentPage === "login" ? "Welcome back" : "Join MentorLink"}
+            Welcome back
           </h1>
           <p className="text-gray-400">
-            {currentPage === "login"
-              ? "Sign in to your account to continue"
-              : "Create your account and start connecting"}
+            Sign in to your account to continue
           </p>
         </div>
 
@@ -94,8 +92,7 @@ const LoginPage = () => {
               showPassword={showPassword}
             />
 
-            {/* Forgot Password (Login only) */}
-            {currentPage === "login" && (
+
               <div className="text-right">
                 <button
                   type="button"
@@ -104,7 +101,7 @@ const LoginPage = () => {
                   Forgot password?
                 </button>
               </div>
-            )}
+        
 
             {/* Submit Button */}
             <button
@@ -112,9 +109,7 @@ const LoginPage = () => {
               className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-medium py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-red-500/25 group"
             >
               <span className="flex items-center justify-center space-x-2">
-                <span>
-                  {currentPage === "login" ? "Sign In" : "Create Account"}
-                </span>
+                <span>Sign In</span>
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
               </span>
             </button>
@@ -148,16 +143,12 @@ const LoginPage = () => {
         {/* Switch Form */}
         <div className="text-center mt-6">
           <p className="text-gray-400">
-            {currentPage === "login"
-              ? "Don't have an account?"
-              : "Already have an account?"}{" "}
+            Don&apos;t have an account?{" "}
             <button
-              onClick={() =>
-                setCurrentPage(currentPage === "login" ? "signup" : "login")
-              }
+              onClick={() => router.push("/signup")}
               className="text-red-400 hover:text-red-300 font-medium transition-colors duration-300"
             >
-              {currentPage === "login" ? "Sign up" : "Sign in"}
+              Sign up
             </button>
           </p>
         </div>

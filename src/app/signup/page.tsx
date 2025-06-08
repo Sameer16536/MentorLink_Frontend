@@ -7,14 +7,13 @@ import { apiUtility } from "@/utils/Api";
 import { useRouter, useSearchParams } from "next/navigation";
 
 
-const LoginPage = () => {
-  const [currentPage, setCurrentPage] = useState("signup");
+const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const searchParams = useSearchParams();
   const role = searchParams.get("role");
+  const router = useRouter();
   
-  const router = useRouter()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -98,36 +97,30 @@ const LoginPage = () => {
             </span>
           </div>
           <h1 className="text-2xl font-bold text-white mb-2">
-            {currentPage === "login" ? "Welcome back" : "Join MentorLink"}
+            Join MentorLink
           </h1>
           <p className="text-gray-400">
-            {currentPage === "login"
-              ? "Sign in to your account to continue"
-              : "Create your account and start connecting"}
+            Create your account and start connecting
           </p>
         </div>
 
         {/* Auth Form */}
         <div className="bg-gray-800/20 backdrop-blur-xl rounded-2xl border border-gray-700/30 p-8 shadow-2xl">
           <div className="space-y-6">
-            {/* Role Selection (Signup only) */}
-            {currentPage === "signup" && (
-              <div className="space-y-3">
-                <RoleSelector />
-              </div>
-            )}
+            {/* Role Selection */}
+            <div className="space-y-3">
+              <RoleSelector />
+            </div>
 
-            {/* Name Field (Signup only) */}
-            {currentPage === "signup" && (
-              <InputField
-                icon={User}
-                type="text"
-                name="name"
-                placeholder="Full name"
-                value={formData.name}
-                onChange={handleInputChange}
-              />
-            )}
+            {/* Name Field */}
+            <InputField
+              icon={User}
+              type="text"
+              name="name"
+              placeholder="Full name"
+              value={formData.name}
+              onChange={handleInputChange}
+            />
 
             {/* Email Field */}
             <InputField
@@ -152,32 +145,18 @@ const LoginPage = () => {
               showPassword={showPassword}
             />
 
-            {/* Confirm Password (Signup only) */}
-            {currentPage === "signup" && (
-              <InputField
-                icon={Lock}
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm password"
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                showToggle
-                onToggle={() => setShowConfirmPassword(!showConfirmPassword)}
-                showPassword={showConfirmPassword}
-              />
-            )}
-
-            {/* Forgot Password (Login only) */}
-            {currentPage === "login" && (
-              <div className="text-right">
-                <button
-                  type="button"
-                  className="text-sm text-red-400 hover:text-red-300 transition-colors duration-300"
-                >
-                  Forgot password?
-                </button>
-              </div>
-            )}
+            {/* Confirm Password */}
+            <InputField
+              icon={Lock}
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm password"
+              value={formData.confirmPassword}
+              onChange={handleInputChange}
+              showToggle
+              onToggle={() => setShowConfirmPassword(!showConfirmPassword)}
+              showPassword={showConfirmPassword}
+            />
 
             {/* Submit Button */}
             <button
@@ -185,9 +164,7 @@ const LoginPage = () => {
               className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-medium py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-red-500/25 group"
             >
               <span className="flex items-center justify-center space-x-2">
-                <span>
-                  {currentPage === "login" ? "Sign In" : "Create Account"}
-                </span>
+                <span>Create Account</span>
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
               </span>
             </button>
@@ -216,41 +193,35 @@ const LoginPage = () => {
               />
             </div>
 
-            {/* Terms (Signup only) */}
-            {currentPage === "signup" && (
-              <p className="text-xs text-gray-500 text-center leading-relaxed">
-                By creating an account, you agree to our{" "}
-                <a
-                  href="#"
-                  className="text-red-400 hover:text-red-300 transition-colors duration-300"
-                >
-                  Terms of Service
-                </a>{" "}
-                and{" "}
-                <a
-                  href="#"
-                  className="text-red-400 hover:text-red-300 transition-colors duration-300"
-                >
-                  Privacy Policy
-                </a>
-              </p>
-            )}
+            {/* Terms */}
+            <p className="text-xs text-gray-500 text-center leading-relaxed">
+              By creating an account, you agree to our{" "}
+              <a
+                href="#"
+                className="text-red-400 hover:text-red-300 transition-colors duration-300"
+              >
+                Terms of Service
+              </a>{" "}
+              and{" "}
+              <a
+                href="#"
+                className="text-red-400 hover:text-red-300 transition-colors duration-300"
+              >
+                Privacy Policy
+              </a>
+            </p>
           </div>
         </div>
 
         {/* Switch Form */}
         <div className="text-center mt-6">
           <p className="text-gray-400">
-            {currentPage === "login"
-              ? "Don't have an account?"
-              : "Already have an account?"}{" "}
+            Already have an account?{" "}
             <button
-              onClick={() =>
-                setCurrentPage(currentPage === "login" ? "signup" : "login")
-              }
+              onClick={() => router.push("/login")}
               className="text-red-400 hover:text-red-300 font-medium transition-colors duration-300"
             >
-              {currentPage === "login" ? "Sign up" : "Sign in"}
+              Sign in
             </button>
           </p>
         </div>
@@ -259,4 +230,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignupPage;
