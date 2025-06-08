@@ -91,7 +91,7 @@ const Footer = () => {
             <div className="lg:col-span-2">
               <div className="mb-6">
                 <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  Topmate
+                    MentorLink
                 </h2>
                 <p className="text-gray-300 mt-4 text-lg leading-relaxed">
                   Connect with industry experts and accelerate your career growth through personalized mentorship and guidance.
@@ -102,7 +102,7 @@ const Footer = () => {
               <div className="space-y-3 mb-6">
                 <div className="flex items-center">
                   <Mail className="w-5 h-5 text-purple-400 mr-3" />
-                  <span className="text-gray-300">hello@topmate.io</span>
+                  <span className="text-gray-300">hello@mentorlink.io</span>
                 </div>
                 <div className="flex items-center">
                   <Phone className="w-5 h-5 text-purple-400 mr-3" />
@@ -110,7 +110,7 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center">
                   <MapPin className="w-5 h-5 text-purple-400 mr-3" />
-                  <span className="text-gray-300">San Francisco, CA</span>
+                  <span className="text-gray-300">Mumbai, India</span>
                 </div>
               </div>
 
@@ -230,7 +230,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-400 text-sm mb-4 md:mb-0">
-              © {currentYear} Topmate. All rights reserved.
+              © {currentYear} MentorLink. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">

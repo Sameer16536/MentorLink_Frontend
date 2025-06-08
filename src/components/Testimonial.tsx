@@ -153,7 +153,7 @@ const TestimonialsSection = ({ testimonials = [] }) => {
           </h2>
           <p className="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
             Real people, real results - see how others achieved their goals with
-            Topmate. Their stories prove what&apos;s possible when you take action on
+            MentorLink. Their stories prove what&apos;s possible when you take action on
             expert advice.
           </p>
         </div>
