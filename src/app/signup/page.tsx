@@ -20,7 +20,7 @@ const LoginPage = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    role: role || "MENTEE", // 'mentee' or 'mentor'
+    role: role 
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +39,7 @@ const LoginPage = () => {
       name: formData.name,
       email: formData.email,
       password: formData.password,
-      role: formData.role,
+      role: formData?.role || "MENTEE",
     };
     try {
       await apiUtility.registerUser(payload);
@@ -55,11 +55,11 @@ const LoginPage = () => {
     <div className="grid grid-cols-2 gap-4">
       {[
         {
-          key: "mentee",
+          key: "MENTEE",
           label: "I'm seeking guidance",
           desc: "Looking for mentorship",
         },
-        { key: "mentor", label: "I'm an expert", desc: "Ready to help others" },
+        { key: "MENTOR", label: "I'm an expert", desc: "Ready to help others" },
       ].map((role) => (
         <button
           key={role.key}

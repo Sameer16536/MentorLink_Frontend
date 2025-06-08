@@ -126,13 +126,13 @@ const Navbar = ({
                     </p>
                   </div>
                   <a
-                    href="/expert-login"
+                    href="/login?role=MENTOR"
                     className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
                   >
                     Login
                   </a>
                   <a
-                    href="/expert-signup"
+                    href="/signup?role=MENTOR"
                     className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
                   >
                     Sign up

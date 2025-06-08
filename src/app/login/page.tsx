@@ -1,35 +1,20 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Mail,
-  Lock,
-  User,
-  ArrowRight,
-  Github,
-  Chrome,
-} from "lucide-react";
+import { Mail, Lock, ArrowRight, Github, Chrome } from "lucide-react";
 import InputField from "@/components/InputField";
 import SocialButton from "@/components/SocialButton";
 import { useSearchParams } from "next/navigation";
-
-
-
-
-
-
+import { apiUtility } from "@/utils/Api";
 
 const LoginPage = () => {
   const [currentPage, setCurrentPage] = useState("login");
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const searchParams = useSearchParams()
-  const role = searchParams.get("role")
+  const searchParams = useSearchParams();
+  const role = searchParams.get("role");
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
-    confirmPassword: "",
-    role: role || "MENTEE", // 'mentee' or 'mentor'
+    role: role || "MENTEE",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,40 +24,20 @@ const LoginPage = () => {
     });
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleSubmit = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
+    const payload = {
+      email: formData.email,
+      password: formData.password,
+      role: formData.role,
+    };
+    //login user
+    const response = await apiUtility.loginUser(payload);
+    console.log("user logged in successfully", response);
     console.log("Form submitted:", formData);
   };
-
-
-
-
-  const RoleSelector = () => (
-    <div className="grid grid-cols-2 gap-4">
-      {[
-        {
-          key: "mentee",
-          label: "I'm seeking guidance",
-          desc: "Looking for mentorship",
-        },
-        { key: "mentor", label: "I'm an expert", desc: "Ready to help others" },
-      ].map((role) => (
-        <button
-          key={role.key}
-          type="button"
-          onClick={() => setFormData({ ...formData, role: role.key })}
-          className={`p-4 rounded-xl border-2 transition-all duration-300 group text-left ${
-            formData.role === role.key
-              ? "border-red-500/50 bg-red-500/10 text-white"
-              : "border-gray-700/50 hover:border-gray-600/50 text-gray-400 hover:text-white"
-          }`}
-        >
-          <div className="font-medium text-sm">{role.label}</div>
-          <div className="text-xs opacity-75 mt-1">{role.desc}</div>
-        </button>
-      ))}
-    </div>
-  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black flex items-center justify-center p-4">
@@ -106,26 +71,6 @@ const LoginPage = () => {
         {/* Auth Form */}
         <div className="bg-gray-800/20 backdrop-blur-xl rounded-2xl border border-gray-700/30 p-8 shadow-2xl">
           <div className="space-y-6">
-            {/* Role Selection (Signup only) */}
-            {currentPage === "signup" && (
-              <div className="space-y-3">
-               
-                <RoleSelector />
-              </div>
-            )}
-
-            {/* Name Field (Signup only) */}
-            {currentPage === "signup" && (
-              <InputField
-                icon={User}
-                type="text"
-                name="name"
-                placeholder="Full name"
-                value={formData.name}
-                onChange={handleInputChange}
-              />
-            )}
-
             {/* Email Field */}
             <InputField
               icon={Mail}
@@ -148,21 +93,6 @@ const LoginPage = () => {
               onToggle={() => setShowPassword(!showPassword)}
               showPassword={showPassword}
             />
-
-            {/* Confirm Password (Signup only) */}
-            {currentPage === "signup" && (
-              <InputField
-                icon={Lock}
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm password"
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                showToggle
-                onToggle={() => setShowConfirmPassword(!showConfirmPassword)}
-                showPassword={showConfirmPassword}
-              />
-            )}
 
             {/* Forgot Password (Login only) */}
             {currentPage === "login" && (
@@ -212,26 +142,6 @@ const LoginPage = () => {
                 className="text-gray-300 hover:text-white hover:bg-white/5"
               />
             </div>
-
-            {/* Terms (Signup only) */}
-            {currentPage === "signup" && (
-              <p className="text-xs text-gray-500 text-center leading-relaxed">
-                By creating an account, you agree to our{" "}
-                <a
-                  href="#"
-                  className="text-red-400 hover:text-red-300 transition-colors duration-300"
-                >
-                  Terms of Service
-                </a>{" "}
-                and{" "}
-                <a
-                  href="#"
-                  className="text-red-400 hover:text-red-300 transition-colors duration-300"
-                >
-                  Privacy Policy
-                </a>
-              </p>
-            )}
           </div>
         </div>
 
