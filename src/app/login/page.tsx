@@ -5,9 +5,12 @@ import InputField from "@/components/InputField";
 import SocialButton from "@/components/SocialButton";
 import { useSearchParams, useRouter } from "next/navigation";
 import { apiUtility } from "@/utils/Api";
+import { loginSuccess } from "@/redux/userSlice";
+import { useAppDispatch } from "@/redux/hooks";
 
 const LoginPage = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch()
   const [showPassword, setShowPassword] = useState(false);
   const searchParams = useSearchParams();
   const role = searchParams.get("role");
@@ -33,10 +36,26 @@ const LoginPage = () => {
       password: formData.password,
       role: formData.role,
     };
-    //login user
-    const response = await apiUtility.loginUser(payload);
-    console.log("user logged in successfully", response);
-    console.log("Form submitted:", formData);
+    try {
+      //login user
+      const response = await apiUtility.loginUser(payload);
+      if (!response.token) {
+        throw new Error("Sign-in failed!");
+      }
+      console.log("Login successful:", response);
+      dispatch(
+        loginSuccess({
+          id: response.user.id,
+          name: response.user.name,
+          email: response.user.email,
+          role: response.user.role,
+          token: response.token,
+        })
+      );
+      console.log("Login action dispatched:", loginSuccess);
+    } catch (error) {
+      console.error("Login error:", error);
+    }
   };
 
   return (
@@ -51,19 +70,18 @@ const LoginPage = () => {
         {/* Logo Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center space-x-3 mb-4">
-            <div className="w-10 h-10 bg-gradient-to-br from-red-500 via-red-600 to-orange-500 rounded-full flex items-center justify-center shadow-lg" onClick={() => router.push("/")}>
+            <div
+              className="w-10 h-10 bg-gradient-to-br from-red-500 via-red-600 to-orange-500 rounded-full flex items-center justify-center shadow-lg"
+              onClick={() => router.push("/")}
+            >
               <span className="text-white font-bold">M</span>
             </div>
             <span className="text-white font-semibold text-2xl tracking-tight">
               MentorLink
             </span>
           </div>
-          <h1 className="text-2xl font-bold text-white mb-2">
-            Welcome back
-          </h1>
-          <p className="text-gray-400">
-            Sign in to your account to continue
-          </p>
+          <h1 className="text-2xl font-bold text-white mb-2">Welcome back</h1>
+          <p className="text-gray-400">Sign in to your account to continue</p>
         </div>
 
         {/* Auth Form */}
@@ -92,16 +110,15 @@ const LoginPage = () => {
               showPassword={showPassword}
             />
 
-
-              <div className="text-right">
-                <button
-                  type="button"
-                  className="text-sm text-red-400 hover:text-red-300 transition-colors duration-300"
-                >
-                  Forgot password?
-                </button>
-              </div>
-        
+            <div className="text-right">
+              <button
+                type="button"
+                className="text-sm text-red-400 hover:text-red-300 transition-colors duration-300"
+                onClick={() => router.push(`/forgot-password`)}
+              >
+                Forgot password?
+              </button>
+            </div>
 
             {/* Submit Button */}
             <button
