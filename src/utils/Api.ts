@@ -43,7 +43,15 @@ const apiCall = async <TResponse, TRequest = Record<string, unknown>>({
 export const apiUtility = {
   loginUser: (body: { email: string; password: string; role: string }) =>
     apiCall<
-      { token: string },
+      {
+        token: string;
+        user: {
+          id: string;
+          name: string;
+          email: string;
+          role: string;
+        }
+      },
       { email: string; password: string; role: string }
     >({
       method: "POST",
@@ -63,6 +71,36 @@ export const apiUtility = {
     >({
       method: "POST",
       url: "/user/register",
+      data: body,
+    }),
+
+  sendResetOtp: (body: { email: string }) =>
+    apiCall<
+      { message: string },
+      { email: string }
+    >({
+      method: "POST",
+      url: "/user/forgot-password",
+      data: body,
+    }),
+
+  verifyResetOtp: (body: { email: string; otp: string }) =>
+    apiCall<
+      { valid: boolean },
+      { email: string; otp: string }
+    >({
+      method: "POST",
+      url: "/user/verify-otp",
+      data: body,
+    }),
+
+  resetPassword: (body: { email: string; otp: string; password: string }) =>
+    apiCall<
+      { message: string },
+      { email: string; otp: string; password: string }
+    >({
+      method: "POST",
+      url: "/user/reset-password",
       data: body,
     }),
 };
