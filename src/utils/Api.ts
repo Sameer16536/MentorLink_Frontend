@@ -44,13 +44,14 @@ export const apiUtility = {
   loginUser: (body: { email: string; password: string; role: string }) =>
     apiCall<
       {
-        token: string;
+        message: string;
         user: {
           id: string;
           name: string;
           email: string;
           role: string;
-        }
+        };
+        accessToken: string;
       },
       { email: string; password: string; role: string }
     >({
