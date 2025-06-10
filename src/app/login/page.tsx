@@ -39,19 +39,17 @@ const LoginPage = () => {
     try {
       //login user
       const response = await apiUtility.loginUser(payload);
-      if (!response.token) {
-        throw new Error("Sign-in failed!");
-      }
-      console.log("Login successful:", response);
+      console.log("Login response:", response);
       dispatch(
         loginSuccess({
           id: response.user.id,
           name: response.user.name,
           email: response.user.email,
           role: response.user.role,
-          token: response.token,
+          token: response.accessToken, 
         })
       );
+      router.push(`/${role?.toLowerCase()}/home`);
       console.log("Login action dispatched:", loginSuccess);
     } catch (error) {
       console.error("Login error:", error);
