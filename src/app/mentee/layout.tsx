@@ -6,10 +6,8 @@ import {
   Calendar, 
   Search, 
   User, 
-  Trophy, 
   BookOpen, 
   Bell, 
-  Settings
 } from 'lucide-react';
 import { useAppSelector } from '@/redux/hooks';
 
