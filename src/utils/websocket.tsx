@@ -1,4 +1,4 @@
-import { join } from "path";
+
 import { useEffect, useRef } from "react";
 
 interface VideoRoomProps {
@@ -35,11 +35,33 @@ const VideoRoom = ({ roomId, isMentor }: VideoRoomProps) => {
 
     // Handle incoming messages
     socketRef.current.onmessage = (event) => {
-                
-    }
+      const msg = JSON.parse(event.data);
+      console.log("Message received:", msg);
 
+      switch (msg.action) {
+        case "joinRoom":
+          console.log(`✅ Joined room: ${msg.data.roomId}`);
+          break;
+
+        default:
+          console.warn("Unknown action:", msg.action);
+      }
+    };
+
+    //  Cleanup on unmount
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.close();
+        socketRef.current = null;
+      }
+    };
   }, [roomId, isMentor]);
-};
 
+  return (
+    <div className="p-4">
+      Connecting to Room: <strong>{roomId}</strong>
+    </div>
+  );
+};
 
 export default VideoRoom;
