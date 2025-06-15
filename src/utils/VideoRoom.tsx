@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 
 interface VideoRoomProps {
@@ -13,6 +12,7 @@ if (!webSocketUrl) {
 
 const VideoRoom = ({ roomId, isMentor }: VideoRoomProps) => {
   const socketRef = useRef<WebSocket | null>(null);
+  const rtpCapabilitiesRef = useRef<any>(null);
 
   useEffect(() => {
     //Open connection
@@ -41,6 +41,16 @@ const VideoRoom = ({ roomId, isMentor }: VideoRoomProps) => {
       switch (msg.action) {
         case "joinRoom":
           console.log(`✅ Joined room: ${msg.data.roomId}`);
+          // Step 5: Request RTP Capabilities
+          const capabilitiesRequest = {
+            action: "getRTPCapabilities",
+          };
+          socketRef.current?.send(JSON.stringify(capabilitiesRequest));
+          break;
+
+        case "rtpCapabilities":
+          rtpCapabilitiesRef.current = msg.data;
+          console.log("RTP Capabilities received:", rtpCapabilitiesRef.current);
           break;
 
         default:
